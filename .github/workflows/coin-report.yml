@@ -1,0 +1,29 @@
+name: Daily Coin Report
+
+on:
+  schedule:
+    - cron: '9 9 * * *'  # ⏰ UTC 기준 09:09 → 한국시간 18:09
+  workflow_dispatch:  # 수동 실행도 가능하게 추가
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ✅ 저장소 클론
+        uses: actions/checkout@v3
+
+      - name: ✅ 파이썬 설치
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: ✅ 의존성 설치
+        run: pip install -r requirements.txt
+
+      - name: ✅ report_coin.py 실행
+        run: python report_coin.py
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          EMAIL_ADDRESS: ${{ secrets.EMAIL_ADDRESS }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
