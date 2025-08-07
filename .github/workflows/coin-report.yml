@@ -2,7 +2,7 @@ name: Daily Coin Report
 
 on:
   schedule:
-    - cron: '9 20 * * *'  # ⏰ UTC 기준 09:20 → 한국시간 18:20
+    - cron: '0 9 * * *'  # ⏰ UTC 기준 09:20 → 한국시간 18:20
   workflow_dispatch:  # 수동 실행도 가능하게 추가
 
 jobs:
