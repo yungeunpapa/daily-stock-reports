@@ -1,9 +1,9 @@
-name: Daily Coin Report
+name: EMAIL_REPORT
 
 on:
   schedule:
-    - cron: '50 1 * * *'   # ✅ 한국 오전 10시 50분 → UTC 오전 1시 50분 
-  workflow_dispatch:       # 👉 수동 실행도 허용
+    - cron: '20 2 * * *'   # ✅ 한국 시간 매일 오전 11시 20분 → UTC 02:20
+  workflow_dispatch:
 
 jobs:
   run-script:
@@ -21,8 +21,8 @@ jobs:
       - name: ✅ 의존성 설치
         run: pip install -r requirements.txt
 
-      - name: ✅ report_coin.py 실행
-        run: python report_coin.py
+      - name: ✅ app.py 실행
+        run: python app.py
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           EMAIL_ADDRESS: ${{ secrets.EMAIL_ADDRESS }}
