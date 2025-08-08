@@ -1,4 +1,4 @@
-name: Send Daily Stock Email
+ name: Send Daily Stock Email
 
 on:
   schedule:
