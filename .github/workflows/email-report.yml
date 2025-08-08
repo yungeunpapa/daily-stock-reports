@@ -1,0 +1,19 @@
+name: Daily Report
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'    # 5분마다 테스트
+  workflow_dispatch:
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with: { python-version: '3.11' }
+      - run: pip install -r requirements.txt
+      - name: Run app.py
+        run: python app.py
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
