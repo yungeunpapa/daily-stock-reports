@@ -2,7 +2,7 @@ name: Email_report
 
 on:
   schedule:
-    - cron: '5 * * * *'   # ✅ 한국 시간 매일 오전 11시 20분 → UTC 02:20
+    - cron: '5 * * * *'   
   workflow_dispatch:
 
 jobs:
