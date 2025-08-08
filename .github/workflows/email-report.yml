@@ -1,19 +1,24 @@
-name: Daily Report
+name: Send Daily Stock Email
 
 on:
   schedule:
-    - cron: '*/5 * * * *'    # 5분마다 테스트
-  workflow_dispatch:
+    - cron: '0 0 * * *'  # UTC 00:00 = 한국 오전 9시
+  workflow_dispatch:     # 수동 실행도 가능
 
 jobs:
-  run-script:
+  send-report:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with: { python-version: '3.11' }
-      - run: pip install -r requirements.txt
-      - name: Run app.py
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run the app
         run: python app.py
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
