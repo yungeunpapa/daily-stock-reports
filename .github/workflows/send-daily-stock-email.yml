@@ -6,18 +6,19 @@ on:
   workflow_dispatch:
 
 jobs:
-  send-report:
+  run-script:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repository
+      - name: ✅ 저장소 클론
         uses: actions/checkout@v3
 
-      - name: Set up Python
+      - name: ✅ 파이썬 설치
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: '3.11'
 
-      - name: Install dependencies
+      - name: ✅ 의존성 설치
         run: pip install -r requirements.txt
 
       - name: Run the app
