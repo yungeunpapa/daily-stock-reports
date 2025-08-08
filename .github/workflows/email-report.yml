@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 name: EMAIL_REPORT
 
 on:
   schedule:
     - cron: '5 * * * *'   # ✅ 한국 시간 매일 오전 11시 20분 → UTC 02:20 
+=======
+name: Email_report
+
+on:
+  schedule:
+    - cron: '5 * * * *'   # ✅ 한국 시간 매일 오전 11시 20분 → UTC 02:20
+>>>>>>> 4da1a48 (🛠 change scheduled run to app.py at 11:20 KST)
   workflow_dispatch:
 
 jobs:
@@ -27,3 +35,4 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           EMAIL_ADDRESS: ${{ secrets.EMAIL_ADDRESS }}
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+
