@@ -1,24 +1,29 @@
-name: Send Daily Stock Email
+name: Daily Coin Report
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # UTC 00:00 = 한국 오전 9시
-  workflow_dispatch:     # 수동 실행도 가능
+    - cron: '50 1 * * *'   # ✅ 한국 오전 10시 50분 → UTC 오전 1시 50분
+  workflow_dispatch:       # 👉 수동 실행도 허용
 
 jobs:
-  send-report:
+  run-script:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repository
+      - name: ✅ 저장소 클론
         uses: actions/checkout@v3
 
-      - name: Set up Python
+      - name: ✅ 파이썬 설치
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: '3.11'
 
-      - name: Install dependencies
+      - name: ✅ 의존성 설치
         run: pip install -r requirements.txt
 
-      - name: Run the app
-        run: python app.py
+      - name: ✅ report_coin.py 실행
+        run: python report_coin.py
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          EMAIL_ADDRESS: ${{ secrets.EMAIL_ADDRESS }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
