@@ -2,7 +2,7 @@ name: Send Daily Stock Email
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # UTC 00:00 = 한국 오전 9시
+    - cron: '0 0 * * *'  # UTC 00:00 = 한국 시간 매일 오전 9시
   workflow_dispatch:     # 수동 실행도 가능
 
 jobs:
@@ -22,3 +22,7 @@ jobs:
 
       - name: Run the app
         run: python app.py
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          EMAIL_ADDRESS:   ${{ secrets.EMAIL_ADDRESS }}
+          EMAIL_PASSWORD:  ${{ secrets.EMAIL_PASSWORD }}
